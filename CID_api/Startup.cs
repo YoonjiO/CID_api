@@ -40,6 +40,12 @@ namespace CID_api
 
             app.UseRouting();
 
+            app.UseCors(corsPolicyBuilder =>
+               corsPolicyBuilder.WithOrigins("http://localhost:4004")
+              .AllowAnyMethod()
+              .AllowAnyHeader()
+            );
+
             app.UseAuthorization();
 
 

@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using System.Runtime.InteropServices;
+using Microsoft.AspNetCore.Cors;
+using System.IO;
+
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -11,36 +15,20 @@ namespace CID_api
     [Route("api/values")]
     public class CIDConnectController : Controller
     {
+        [DllImport("SKB_OpenAPI_IMS.dll")]
+        public static extern int IMS_Init(string strAppKey);
+
+        [DllImport("SKB_OpenAPI_IMS.dll")]
+        public static extern int IMS_GetVersion();
+
         // GET: api/values
         [HttpGet]
         public IEnumerable<string> Get()
         {
+            //var nResult = IMS_GetVersion();
+            //System.Diagnostics.Debug.WriteLine(nResult);
+
             return new string[] { "haha", "hoho" };
-        }
-
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }
